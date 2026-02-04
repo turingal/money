@@ -41,7 +41,7 @@ class Money extends BaseMoney
             $twoOrLessSubUnitCurrencies[$currency->getCode()] = $subUnit;
         }
 
-        /** @psalm-var array<non-empty-string, positive-int|0> $twoOrLessSubUnitCurrencies */
+        /** @psalm-var array<non-empty-string, int<0, 2>> $twoOrLessSubUnitCurrencies */
         $currencies = new CurrencyList($twoOrLessSubUnitCurrencies);
 
         self::$currencies = $currencies;
