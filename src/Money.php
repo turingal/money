@@ -9,7 +9,8 @@ use Money\Currencies\CurrencyList;
 use Money\Currencies\ISOCurrencies;
 use Override;
 
-final class Money extends BaseMoney
+/** @psalm-api */
+class Money extends BaseMoney
 {
     private static Currencies|null $currencies = null;
 

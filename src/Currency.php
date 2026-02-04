@@ -7,36 +7,37 @@ namespace OnMoon\Money;
 use Money\Currencies;
 use Money\Currency as LibCurrency;
 
-final class Currency
+/** @psalm-api */
+class Currency
 {
     /** @psalm-param  non-empty-string $code */
-    final private function __construct(private string $code)
+    final protected function __construct(private string $code)
     {
     }
 
     /** @psalm-param  non-empty-string $code */
-    final public static function create(string $code): self
+    public static function create(string $code): self
     {
         return new static($code);
     }
 
     /** @psalm-return non-empty-string */
-    final public function getCode(): string
+    public function getCode(): string
     {
         return $this->getLibCurrency()->getCode();
     }
 
-    final public function equals(self $other): bool
+    public function equals(self $other): bool
     {
         return $this->getLibCurrency()->equals($other->getLibCurrency());
     }
 
-    final public function isAvailableWithin(Currencies $currencies): bool
+    public function isAvailableWithin(Currencies $currencies): bool
     {
         return $currencies->contains($this->getLibCurrency());
     }
 
-    final public function jsonSerialize(): string
+    public function jsonSerialize(): string
     {
         return $this->getLibCurrency()->jsonSerialize();
     }
