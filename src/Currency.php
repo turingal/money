@@ -7,7 +7,7 @@ namespace OnMoon\Money;
 use Money\Currencies;
 use Money\Currency as LibCurrency;
 
-class Currency
+final class Currency
 {
     /** @psalm-param  non-empty-string $code */
     final private function __construct(private string $code)

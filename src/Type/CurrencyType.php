@@ -6,14 +6,16 @@ namespace OnMoon\Money\Type;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
+use Override;
 
 use function array_merge;
 
-class CurrencyType extends Type
+final class CurrencyType extends Type
 {
     public const TYPE_NAME = 'currency';
 
     /** @param mixed[] $column */
+    #[Override]
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         return $platform->getStringTypeDeclarationSQL(

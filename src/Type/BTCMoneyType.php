@@ -6,16 +6,18 @@ namespace OnMoon\Money\Type;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
+use Override;
 
 use function array_merge;
 use function bcdiv;
 use function bcmul;
 
-class BTCMoneyType extends Type
+final class BTCMoneyType extends Type
 {
     public const TYPE_NAME = 'btc_money';
 
     /** @param mixed[] $column */
+    #[Override]
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         return $platform->getDecimalTypeDeclarationSQL(
@@ -29,6 +31,7 @@ class BTCMoneyType extends Type
         );
     }
 
+    #[Override]
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): string|null
     {
         if ($value === null) {
@@ -41,6 +44,7 @@ class BTCMoneyType extends Type
         return bcmul($value, '100000000', 0);
     }
 
+    #[Override]
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): string|null
     {
         if ($value === null) {

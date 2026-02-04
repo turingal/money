@@ -7,16 +7,19 @@ namespace OnMoon\Money;
 use Money\Currencies;
 use Money\Currencies\CurrencyList;
 use Money\Currencies\ISOCurrencies;
+use Override;
 
-class Money extends BaseMoney
+final class Money extends BaseMoney
 {
     private static Currencies|null $currencies = null;
 
+    #[Override]
     protected static function classSubunits(): int
     {
         return 2;
     }
 
+    #[Override]
     protected static function getAllowedCurrencies(): Currencies
     {
         if (self::$currencies !== null) {

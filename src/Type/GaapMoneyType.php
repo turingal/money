@@ -6,16 +6,18 @@ namespace OnMoon\Money\Type;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
+use Override;
 
 use function array_merge;
 use function bcdiv;
 use function bcmul;
 
-class GaapMoneyType extends Type
+final class GaapMoneyType extends Type
 {
     public const TYPE_NAME = 'gaap_money';
 
     /** @param mixed[] $column */
+    #[Override]
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         return $platform->getDecimalTypeDeclarationSQL(
@@ -29,6 +31,7 @@ class GaapMoneyType extends Type
         );
     }
 
+    #[Override]
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): string|null
     {
         if ($value === null) {
@@ -41,6 +44,7 @@ class GaapMoneyType extends Type
         return bcmul($value, '10000', 0);
     }
 
+    #[Override]
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): string|null
     {
         if ($value === null) {
